@@ -26,48 +26,48 @@ class SnackTests(TestCase):
         url = reverse("snack-list")
         response = self.client.get(url)
         self.assertEquals(response.status_code,200)
-        # self.assertContains(response,"snack3")
-        # self.assertTemplateUsed(response,"snacks/snack_list.html")
+        self.assertContains(response,"snack3")
+        self.assertTemplateUsed(response,"snacks/snack_list.html")
     
-    # def test_snack_detail_view(self):
-    #     url = reverse("snack-detail",args="1")
-    #     response = self.client.get(url)
-    #     no_response = self.client.get("/200000/")
-    #     self.assertEquals(response.status_code,200)
-    #     self.assertEquals(no_response.status_code,404)
-    #     self.assertContains(response,"Purchaser: tester")
-    #     self.assertTemplateUsed(response,"snack_detail.html")
+    def test_snack_detail_view(self):
+        url = reverse("snack-detail",args="1")
+        response = self.client.get(url)
+        no_response = self.client.get("/200000/")
+        self.assertEquals(response.status_code,200)
+        self.assertEquals(no_response.status_code,404)
+        self.assertContains(response,"Purchaser:")
+        self.assertTemplateUsed(response,"snacks/snack_detail.html")
     
-    # def test_snack_create_view(self):
-    #     response = self.client.post(
-    #         reverse("snack-create"),
-    #         {
-    #             "title":"snackTest",
-    #             "purchaser":self.user.id,
-    #             "description":"snackTest",
-    #         },
-    #         follow=True
-    #     )
-    #     self.assertRedirects(response,reverse("snack-detail",args="2"))
-    #     self.assertContains(response,"Title: snackTest")
+    def test_snack_create_view(self):
+        response = self.client.post(
+            reverse("snack-create"),
+            {
+                "title":"snackTest",
+                "purchaser":self.user.id,
+                "description":"snackTest",
+            },
+            follow=True
+        )
+        self.assertRedirects(response,reverse("snack-detail",args="2"))
+        self.assertContains(response,"Title:")
 
-    # def test_snack_update_view(self):
-    #     response = self.client.post(
-    #         reverse("snack-update",args="1"),
-    #         {
-    #             "title":"SnackUpdateTest",
-    #             "purchaser":self.user.id,
-    #             "description":"SnackUpdateTest",
-    #         }
-    #     )
-    #     self.assertRedirects(response,reverse("snack-detail",args="1"))
-    #     # self.assertContains(response,"Title: SnackUpdateTest") # NOT work
+    def test_snack_update_view(self):
+        response = self.client.post(
+            reverse("snack-update",args="1"),
+            {
+                "title":"SnackUpdateTest",
+                "purchaser":self.user.id,
+                "description":"SnackUpdateTest",
+            }
+        )
+        self.assertRedirects(response,reverse("snack-detail",args="1"))
+        # self.assertContains(response,"Title: SnackUpdateTest") # NOT work
 
-    # def snack_delete_view(self):
-    #     response = self.client.get(
-    #         reverse("snack_delete",args="1")
-    #     )
-    #     self.assertEqual(response.status_code,200)
+    def snack_delete_view(self):
+        response = self.client.get(
+            reverse("snack_delete",args="1")
+        )
+        self.assertEqual(response.status_code,200)
 
 
 
