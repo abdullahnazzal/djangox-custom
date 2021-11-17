@@ -31,8 +31,9 @@
         <div class="shadow sm:rounded-md sm:overflow-hidden">
           <div class="px-4 py-5 bg-white space-y-6 sm:p-6">
            <div class="col-span-6 sm:col-span-3">
-                <label for="first-name" class="block text-sm font-medium text-gray-700">First name</label>
-                <input type="text" name="first-name" id="first-name" autocomplete="given-name" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                <label for="title" class="block text-sm font-medium text-gray-700">Title</label>
+                <input type="text" name="title" id="id_title" autocomplete="given-name" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" maxlength="64" required="" >
+                
               </div>
 {% comment %} description {% endcomment %}
             <div>
@@ -40,17 +41,16 @@
                 description:
               </label>
               <div class="mt-1">
-                <textarea id="about" name="about" rows="3" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border border-gray-300 rounded-md" placeholder="you@example.com"></textarea>
+                <textarea id="id_description" name="description" rows="3" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border border-gray-300 rounded-md" placeholder="description" required=""></textarea>
               </div>
             </div>
              {{snacks.purchaser}}
 {% comment %} description {% endcomment %}
            <div class="col-span-6 sm:col-span-3">
-                <label for="country" class="block text-sm font-medium text-gray-700">purchaser</label>
-                <select id="country" name="country" autocomplete="country-name" class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
-                  <option>
-                  a.nazzal1995@gmail.com
-                  </option>
+                <label for="purchaser" class="block text-sm font-medium text-gray-700">purchaser</label>
+                <select id="id_purchaser" name="purchaser" autocomplete="country-name" class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" required="">
+                <option value="" selected="">---------</option>
+                <option value="1">a.nazzal1995@gmai.com</option>
                 </select>
               </div>
            
@@ -71,15 +71,9 @@
 
 </div>
 
-<h2>
-    <a href="{% url 'snack-list' %}">Home</a>
-</h2>
-
-<form action="" method="post">
-    {% csrf_token %}
-    {{form.as_p}}
-    <input type="submit" value="create">
-</form>
-
+{{object_list}}
+{{snacks.purchaser}}
+{{snacks.description}}
+<a href="{% url 'snack-list' %}" class="text-indigo-600 hover:text-indigo-900">Back</a>
 
 {% endblock %}
